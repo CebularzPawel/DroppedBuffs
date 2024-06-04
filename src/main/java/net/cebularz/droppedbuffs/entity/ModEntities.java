@@ -16,7 +16,7 @@ public class ModEntities {
 
 
     public static final RegistryObject<EntityType<BuffEntity>> BUFFENTITY =
-            ENTITY_TYPES.register("buff",()-> EntityType.Builder.of(BuffEntity::new, MobCategory.MISC)
+            ENTITY_TYPES.register("buff",()-> EntityType.Builder.of(BuffEntity::new, MobCategory.CREATURE)
                     .sized(1.0f,1.0f).build("buff"));
 
     public static void register(IEventBus eventBus){

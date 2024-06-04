@@ -15,7 +15,7 @@ public class BuffRenderer extends MobRenderer<BuffEntity, Health_Drop<BuffEntity
 
     @Override
     public ResourceLocation getTextureLocation(BuffEntity pEntity) {
-        return new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/health_drop.png");
+        return new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/health_drop");
     }
 
     @Override
