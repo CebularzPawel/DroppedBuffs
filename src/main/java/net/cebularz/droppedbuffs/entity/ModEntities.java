@@ -1,8 +1,7 @@
 package net.cebularz.droppedbuffs.entity;
 
 import net.cebularz.droppedbuffs.DroppedBuffs;
-import net.cebularz.droppedbuffs.entity.custom.BuffEntity;
-import net.minecraft.world.damagesource.DamageEffects;
+import net.cebularz.droppedbuffs.entity.custom.Meat_Buff_Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,9 +14,9 @@ public class ModEntities {
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, DroppedBuffs.MOD_ID);
 
 
-    public static final RegistryObject<EntityType<BuffEntity>> BUFFENTITY =
-            ENTITY_TYPES.register("buff",()-> EntityType.Builder.of(BuffEntity::new, MobCategory.CREATURE)
-                    .sized(1.0f,1.0f).build("buff"));
+    public static final RegistryObject<EntityType<Meat_Buff_Entity>> MEAT_BUFF_ENTITY =
+            ENTITY_TYPES.register("meat_buff",()-> EntityType.Builder.of(Meat_Buff_Entity::new, MobCategory.CREATURE)
+                    .sized(1.0f,1.0f).build("meat_buff"));
 
     public static void register(IEventBus eventBus){
         ENTITY_TYPES.register(eventBus);
