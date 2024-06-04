@@ -16,8 +16,4 @@ import net.minecraftforge.fml.common.Mod;
 public class ModEventBusEvents {
 
 
-    @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.BUFFENTITY.get(), BuffEntity.createAttributes().build());
-    }
 }
