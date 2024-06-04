@@ -3,6 +3,7 @@ package net.cebularz.droppedbuffs.entity.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.cebularz.droppedbuffs.entity.custom.BuffEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -11,6 +12,8 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Monster;
 
 
 public class Health_Drop<T extends Entity> extends HierarchicalModel<T> {
@@ -19,6 +22,8 @@ public class Health_Drop<T extends Entity> extends HierarchicalModel<T> {
 	public Health_Drop(ModelPart root) {
 		this.bone = root.getChild("bone");
 	}
+
+
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
@@ -35,10 +40,7 @@ public class Health_Drop<T extends Entity> extends HierarchicalModel<T> {
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
-	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
-	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
@@ -48,5 +50,10 @@ public class Health_Drop<T extends Entity> extends HierarchicalModel<T> {
 	@Override
 	public ModelPart root() {
 		return bone;
+	}
+
+	@Override
+	public void setupAnim(T t, float v, float v1, float v2, float v3, float v4) {
+
 	}
 }
