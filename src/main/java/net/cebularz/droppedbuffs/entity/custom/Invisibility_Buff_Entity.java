@@ -25,6 +25,7 @@ public class Invisibility_Buff_Entity extends Entity {
         Random random = new Random();
         rotationY = random.nextFloat() * 360.0F;
         size=1.5F;
+
     }
 
     @Override

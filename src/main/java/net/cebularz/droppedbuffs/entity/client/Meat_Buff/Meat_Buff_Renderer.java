@@ -8,12 +8,15 @@ import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
 import net.cebularz.droppedbuffs.entity.custom.Meat_Buff_Entity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class Meat_Buff_Renderer extends EntityRenderer<Meat_Buff_Entity> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/meat_buff.png");
+
     private final Meat_Buff_Model<Meat_Buff_Entity> model;
     public Meat_Buff_Renderer(EntityRendererProvider.Context context) {
         super(context);
@@ -22,23 +25,26 @@ public class Meat_Buff_Renderer extends EntityRenderer<Meat_Buff_Entity> {
 
     @Override
     public ResourceLocation getTextureLocation(Meat_Buff_Entity pEntity) {
-        return new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/meat_buff.png");
+        return TEXTURE;
     }
 
     @Override
     public void render(Meat_Buff_Entity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
         pPoseStack.pushPose();
-        pPoseStack.translate(0.0D, 2.0D, 0.0D);
+        double bobOffset = Math.sin((pEntity.tickCount + pPartialTick) * 0.075) * 0.075;
+        pPoseStack.translate(0.0D, 0.75D + bobOffset, 0.0D);
+        pPoseStack.mulPose(Axis.XP.rotationDegrees(pEntity.rotationX));
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.rotationY));
-        float size = pEntity.size;
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.rotationZ));
+        float size = 1.5F;
         pPoseStack.scale( size, size,size);
-        pPoseStack.mulPose(Axis.XP.rotationDegrees(180.0F));
 
-        VertexConsumer consumer = pBuffer.getBuffer(this.model.renderType(this.getTextureLocation(pEntity)));
-        model.renderToBuffer(pPoseStack, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1.0F);
+        float alpha = pEntity.alpha;
+
+        VertexConsumer consumer = pBuffer.getBuffer(RenderType.entityTranslucent(TEXTURE));
+        model.renderToBuffer(pPoseStack, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, alpha);
         pPoseStack.popPose();
-
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }
 }

@@ -14,18 +14,25 @@ public class Meat_Buff_Entity extends Entity {
     public Player owner;
 
 
+    public float bobOffset;
 
     public int age;
     public float rotationY;
+    public float rotationX;
+    public float rotationZ;
+    public float alpha;
 
-    public float size;
     public Meat_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.age=0;
         this.owner=null;
         Random random = new Random();
+        rotationX = random.nextFloat() * 360.0F;
         rotationY = random.nextFloat() * 360.0F;
-        size=1.5F;
+        rotationZ = random.nextFloat() * 360.0F;
+
+        alpha = 1F;
+
     }
 
     @Override
@@ -46,19 +53,31 @@ public class Meat_Buff_Entity extends Entity {
                     this.discard();
                     }
                 }
+
             }
+        bobOffset = (float) (Math.sin(this.tickCount * 0.1) * 0.1);
+
+        if (age >= 320 ) {
+            alpha -= 0.0125F;
+        }
+
+
         super.tick();
         this.age++;
         if(this.age>=400){
             this.discard();
         }
-        rotationY += 3.0F;
+        rotationX += 1.5F;
+        rotationY += 1.5F;
+        rotationZ += 1.5F;
 
-        if(age>=340){
-            size-=0.025f;
-        }
-        // Keep values within 0-360 degrees
+        rotationX %= 360.0F;
         rotationY %= 360.0F;
+        rotationZ %= 360.0F;
+
+
+        // Keep values within 0-360 degrees
+
     }
 
     @Override
