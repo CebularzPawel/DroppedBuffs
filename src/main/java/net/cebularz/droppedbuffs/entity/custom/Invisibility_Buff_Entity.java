@@ -3,14 +3,13 @@ package net.cebularz.droppedbuffs.entity.custom;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Random;
 
-public class Meat_Buff_Entity extends Entity {
+public class Invisibility_Buff_Entity extends Entity {
     public Player owner;
 
 
@@ -19,7 +18,7 @@ public class Meat_Buff_Entity extends Entity {
     public float rotationY;
 
     public float size;
-    public Meat_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
+    public Invisibility_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.age=0;
         this.owner=null;

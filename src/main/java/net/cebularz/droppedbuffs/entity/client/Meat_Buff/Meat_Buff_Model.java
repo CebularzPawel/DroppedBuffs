@@ -1,4 +1,4 @@
-package net.cebularz.droppedbuffs.entity.client;// Made with Blockbench 4.10.1
+package net.cebularz.droppedbuffs.entity.client.Meat_Buff;// Made with Blockbench 4.10.1
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -16,7 +16,6 @@ import net.minecraft.world.entity.Entity;
 
 
 public class Meat_Buff_Model<T extends Entity> extends HierarchicalModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "meat_buff"), "main");
 	private final ModelPart bone;
 
 	public Meat_Buff_Model(ModelPart root) {
@@ -46,6 +45,6 @@ public class Meat_Buff_Model<T extends Entity> extends HierarchicalModel<T> {
 
 	@Override
 	public ModelPart root() {
-		return null;
+		return bone;
 	}
 }
