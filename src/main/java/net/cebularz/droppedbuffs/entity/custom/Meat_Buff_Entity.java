@@ -44,7 +44,7 @@ public class Meat_Buff_Entity extends Entity {
     public void tick() {
         List<Entity> nearbyEntities = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox());
         for (Entity entity : nearbyEntities) {
-            if (entity instanceof Player) {
+            if (entity instanceof Player&&(entity==owner||owner==null)) {
                 int food = Math.min(20,((Player) entity).getFoodData().getFoodLevel()+8);
                 if(((Player) entity).getFoodData().getFoodLevel()<20) {
                     ((Player) entity).getFoodData().setFoodLevel(food);
