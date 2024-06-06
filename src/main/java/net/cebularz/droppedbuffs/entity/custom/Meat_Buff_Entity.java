@@ -1,5 +1,6 @@
 package net.cebularz.droppedbuffs.entity.custom;
 
+import net.cebularz.droppedbuffs.Config;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,6 +22,7 @@ public class Meat_Buff_Entity extends Entity {
     public float rotationX;
     public float rotationZ;
     public float alpha;
+    public float duration;
 
     public Meat_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -32,7 +34,7 @@ public class Meat_Buff_Entity extends Entity {
         rotationZ = random.nextFloat() * 360.0F;
 
         alpha = 1F;
-
+        duration = Config.buff_on_ground_duration*20;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Meat_Buff_Entity extends Entity {
     public void tick() {
         List<Entity> nearbyEntities = this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox());
         for (Entity entity : nearbyEntities) {
-            if (entity instanceof Player&&(entity==owner||owner==null)) {
+            if (entity instanceof Player&&(entity==owner||owner==null||Config.global_drop)) {
                 int food = Math.min(20,((Player) entity).getFoodData().getFoodLevel()+8);
                 if(((Player) entity).getFoodData().getFoodLevel()<20) {
                     ((Player) entity).getFoodData().setFoodLevel(food);
@@ -57,14 +59,14 @@ public class Meat_Buff_Entity extends Entity {
             }
         bobOffset = (float) (Math.sin(this.tickCount * 0.1) * 0.1);
 
-        if (age >= 320 ) {
+        if (age >= duration-80 ) {
             alpha -= 0.0125F;
         }
 
 
         super.tick();
         this.age++;
-        if(this.age>=400){
+        if(this.age>=duration){
             this.discard();
         }
         rotationX += 1.5F;

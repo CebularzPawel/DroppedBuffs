@@ -25,7 +25,7 @@ public class ModEvents {
             if(entity instanceof Player player){
                 int chance = random.nextInt(100);
                 int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, player.getMainHandItem());
-                int lootingboost = 2;
+                int lootingboost = Config.looting_extra_chance;
                 int chance2 = Config.log_buff_chance;
                 if(chance<chance2+lootingLevel*lootingboost) {
                     Meat_Buff_Entity buffentity = new Meat_Buff_Entity(ModEntities.MEAT_BUFF_ENTITY.get(), event.getEntity().level());
