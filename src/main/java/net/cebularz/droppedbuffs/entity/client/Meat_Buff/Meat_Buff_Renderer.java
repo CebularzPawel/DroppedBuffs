@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
-import net.cebularz.droppedbuffs.entity.custom.Invisibility_Buff_Entity;
+import net.cebularz.droppedbuffs.entity.custom.Meat_Buff_Entity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,22 +14,22 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class Meat_Buff_Renderer extends EntityRenderer<Invisibility_Buff_Entity> {
+public class Meat_Buff_Renderer extends EntityRenderer<Meat_Buff_Entity> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/meat_buff.png");
 
-    private final Meat_Buff_Model<Invisibility_Buff_Entity> model;
+    private final Meat_Buff_Model<Meat_Buff_Entity> model;
     public Meat_Buff_Renderer(EntityRendererProvider.Context context) {
         super(context);
         this.model = new Meat_Buff_Model<>(context.bakeLayer(ModModelLayers.MEAT_BUFF_LAYER));
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Invisibility_Buff_Entity pEntity) {
+    public ResourceLocation getTextureLocation(Meat_Buff_Entity pEntity) {
         return TEXTURE;
     }
 
     @Override
-    public void render(Invisibility_Buff_Entity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(Meat_Buff_Entity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
         pPoseStack.pushPose();
         double bobOffset = Math.sin((pEntity.tickCount + pPartialTick) * 0.075) * 0.075;
