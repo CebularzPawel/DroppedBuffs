@@ -2,6 +2,7 @@ package net.cebularz.droppedbuffs;
 
 import com.mojang.logging.LogUtils;
 import net.cebularz.droppedbuffs.entity.ModEntities;
+import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Invisibility_Buff.Invisibility_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Meat_Buff.Meat_Buff_Renderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -67,7 +68,7 @@ public class DroppedBuffs
         {
             EntityRenderers.register(ModEntities.MEAT_BUFF_ENTITY.get(), Meat_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.INVISIBILITY_BUFF_ENTITY.get(), Invisibility_Buff_Renderer::new);
-
+            EntityRenderers.register(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
         }
     }
 }

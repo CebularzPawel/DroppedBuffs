@@ -1,6 +1,7 @@
 package net.cebularz.droppedbuffs.entity.custom;
 
 import net.cebularz.droppedbuffs.Config;
+import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -86,7 +87,28 @@ public class Meat_Buff_Entity extends Entity {
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
 
     }
+    @Override
+    public void playerTouch(Player player) {
+        super.playerTouch(player);
 
+
+        if ((player==owner||owner==null||Config.global_drop)) {
+            int food = Math.min(20,(player).getFoodData().getFoodLevel()+8);
+            if((player).getFoodData().getFoodLevel()<20) {
+                ( player).getFoodData().setFoodLevel(food);
+                float saturation = (player).getFoodData().getSaturationLevel();
+                ( player).getFoodData().setSaturation(saturation + 6);
+                if (!this.level().isClientSide) {
+                    Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
+                    buffEntity.setColorMultiplier(0xD87C3F);
+                    buffEntity.setPos(this.getX(), this.getY(), this.getZ());
+                    buffEntity.setOwner(player);
+                    this.level().addFreshEntity(buffEntity);
+                    this.discard();
+                }
+            }
+        }
+    }
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
 
