@@ -1,7 +1,4 @@
-package net.cebularz.droppedbuffs.entity.client.Invisibility_Buff;// Made with Blockbench 4.10.3
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package net.cebularz.droppedbuffs.entity.client.Invisibility_Buff;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,19 +19,30 @@ public class Invisibility_Buff_Model<T extends Entity> extends HierarchicalModel
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
+
+		// Define the total height of the model
 		float totalHeight = 13.0F;
 
+		// Center offset for Y-axis
 		float centerOffsetY = totalHeight / 2;
 
-		PartDefinition invisibility = partdefinition.addOrReplaceChild("invisibility", CubeListBuilder.create().texOffs(0, 13).addBox(-1.0F, centerOffsetY-2, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 0).addBox(-4.0F, centerOffsetY, -1.0F, 8.0F, 11.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 19.75F, 0.0F));
+		// Define and position the "invisibility" part
+		PartDefinition invisibility = partdefinition.addOrReplaceChild(
+				"invisibility",
+				CubeListBuilder.create()
+						.texOffs(0, 13)
+						.addBox(-1.0F, -centerOffsetY + 2.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+						.texOffs(0, 0)
+						.addBox(-4.0F, -centerOffsetY, -1.0F, 8.0F, 11.0F, 2.0F, new CubeDeformation(0.0F)),
+				PartPose.offset(0.0F, 24.0F - totalHeight, 0.0F)
+		);
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		// No animation for this model
 	}
 
 	@Override

@@ -3,6 +3,9 @@ package net.cebularz.droppedbuffs.entity.custom;
 import net.cebularz.droppedbuffs.Config;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -81,8 +84,10 @@ public class Invisibility_Buff_Entity extends Entity {
         if (player==owner||owner==null||Config.global_drop) {
 
             if (!this.level().isClientSide) {
+                MobEffectInstance effect = new MobEffectInstance(MobEffects.INVISIBILITY,30*20,0);
+                player.addEffect(effect);
                 Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
-                buffEntity.setColorMultiplier(0xD87C3F);
+                buffEntity.setColorMultiplier(0xffc400);
                 buffEntity.setPos(this.getX(), this.getY(), this.getZ());
                 buffEntity.setOwner(player);
                 this.level().addFreshEntity(buffEntity);

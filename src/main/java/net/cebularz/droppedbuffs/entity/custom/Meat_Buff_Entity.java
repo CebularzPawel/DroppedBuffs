@@ -81,11 +81,8 @@ public class Meat_Buff_Entity extends Entity {
 
 
         if (player==owner||owner==null||Config.global_drop) {
-            int food = Math.min(20,player.getFoodData().getFoodLevel()+8);
             if(player.getFoodData().getFoodLevel()<20) {
-                player.getFoodData().setFoodLevel(food);
-                float saturation = player.getFoodData().getSaturationLevel();
-                player.getFoodData().setSaturation(saturation + 6);
+                player.getFoodData().eat(8,6);
                 if (!this.level().isClientSide) {
                     Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
                     buffEntity.setColorMultiplier(0xD87C3F);

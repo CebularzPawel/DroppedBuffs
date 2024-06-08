@@ -34,7 +34,7 @@ public class Invisibility_Buff_Renderer extends EntityRenderer<Invisibility_Buff
 
         pPoseStack.pushPose();
         double bobOffset = Math.sin((pEntity.tickCount + pPartialTick) * 0.075) * 0.075;
-        pPoseStack.translate(0.0D, 0.75D + bobOffset, 0.0D);
+        pPoseStack.translate(0.0D,bobOffset, 0.0D);
         pPoseStack.mulPose(Axis.XP.rotationDegrees(pEntity.rotationX));
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.rotationY));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.rotationZ));
