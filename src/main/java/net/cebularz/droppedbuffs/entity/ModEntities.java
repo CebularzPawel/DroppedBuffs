@@ -1,9 +1,7 @@
 package net.cebularz.droppedbuffs.entity;
 
 import net.cebularz.droppedbuffs.DroppedBuffs;
-import net.cebularz.droppedbuffs.entity.custom.Buff_Entity;
-import net.cebularz.droppedbuffs.entity.custom.Invisibility_Buff_Entity;
-import net.cebularz.droppedbuffs.entity.custom.Meat_Buff_Entity;
+import net.cebularz.droppedbuffs.entity.custom.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,7 +21,18 @@ public class ModEntities {
     public static final RegistryObject<EntityType<Invisibility_Buff_Entity>> INVISIBILITY_BUFF_ENTITY =
             ENTITY_TYPES.register("invisibility_buff",()-> EntityType.Builder.of(Invisibility_Buff_Entity::new, MobCategory.MISC)
                     .sized(1.0f,1.0f).build("invisibility_buff"));
-
+    public static final RegistryObject<EntityType<Resistance_Buff_Entity>> RESISTANCE_BUFF_ENTITY =
+            ENTITY_TYPES.register("resistance_buff",()-> EntityType.Builder.of(Resistance_Buff_Entity::new, MobCategory.MISC)
+                    .sized(1.0f,1.0f).build("resistance_buff"));
+    public static final RegistryObject<EntityType<Heal_Buff_Entity>> HEAL_BUFF_ENTITY =
+            ENTITY_TYPES.register("heal_buff",()-> EntityType.Builder.of(Heal_Buff_Entity::new, MobCategory.MISC)
+                    .sized(1.0f,1.0f).build("heal_buff"));
+    public static final RegistryObject<EntityType<Strength_Buff_Entity>> STRENGTH_BUFF_ENTITY =
+            ENTITY_TYPES.register("strength_buff",()-> EntityType.Builder.of(Strength_Buff_Entity::new, MobCategory.MISC)
+                    .sized(1.0f,1.0f).build("strength_buff"));
+    public static final RegistryObject<EntityType<Haste_Buff_Entity>> HASTE_BUFF_ENTITY =
+            ENTITY_TYPES.register("haste_buff",()-> EntityType.Builder.of(Haste_Buff_Entity::new, MobCategory.MISC)
+                    .sized(1.0f,1.0f).build("strength_buff"));
     public static final RegistryObject<EntityType<Buff_Entity>> BUFF_ENTITY =
             ENTITY_TYPES.register("buff" , () -> EntityType.Builder.of(Buff_Entity::new, MobCategory.MISC)
                     .sized(1F, 2F)

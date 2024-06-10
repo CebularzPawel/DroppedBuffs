@@ -3,8 +3,12 @@ package net.cebularz.droppedbuffs;
 import com.mojang.logging.LogUtils;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Haste_Buff.Haste_Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Heal_Buff.Heal_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Invisibility_Buff.Invisibility_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Meat_Buff.Meat_Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Renderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,6 +72,10 @@ public class DroppedBuffs
         {
             EntityRenderers.register(ModEntities.MEAT_BUFF_ENTITY.get(), Meat_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.INVISIBILITY_BUFF_ENTITY.get(), Invisibility_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.RESISTANCE_BUFF_ENTITY.get(), Resistance_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.HEAL_BUFF_ENTITY.get(), Heal_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.STRENGTH_BUFF_ENTITY.get(), Strength_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.HASTE_BUFF_ENTITY.get(), Haste_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
         }
     }
