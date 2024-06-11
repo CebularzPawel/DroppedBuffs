@@ -28,6 +28,9 @@ public class Config
     private static final ForgeConfigSpec.IntValue LOOTING_EXTRA_CHANCE = BUILDER
             .comment("Extra chance of dropping buffs for each looting level")
             .defineInRange("looting_extra_chance", 2,0,Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue LUCK_EXTRA_CHANCE = BUILDER
+            .comment("Extra chance of dropping buffs when luck effect is applied")
+            .defineInRange("luck_extra_chance", 5,0,Integer.MAX_VALUE);
 
     private static final ForgeConfigSpec.BooleanValue GLOBAL_DROP = BUILDER
             .comment("Dropped buffs can be picked up by every player not only by the one who killed the enemy who dropped the buff")
@@ -40,6 +43,7 @@ public class Config
 
     public static int log_buff_chance;
     public static int looting_extra_chance;
+    public static int luck_extra_chance;
 
     public static boolean global_drop;
 
@@ -51,5 +55,6 @@ public class Config
         looting_extra_chance = LOOTING_EXTRA_CHANCE.get();
         global_drop = GLOBAL_DROP.get();
         buff_on_ground_duration = BUFF_ON_GROUND_DURATION.get();
+        luck_extra_chance = LUCK_EXTRA_CHANCE.get();
     }
 }

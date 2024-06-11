@@ -7,6 +7,7 @@ import net.cebularz.droppedbuffs.entity.custom.Invisibility_Buff_Entity;
 import net.cebularz.droppedbuffs.entity.custom.Meat_Buff_Entity;
 import net.cebularz.droppedbuffs.entity.custom.Resistance_Buff_Entity;
 import net.cebularz.droppedbuffs.entity.custom.Strength_Buff_Entity;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -31,6 +32,9 @@ public class ModEvents {
                 int chance = random.nextInt(100);
                 int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, player.getMainHandItem());
                 int lootingboost = Config.looting_extra_chance;
+                if(player.hasEffect(MobEffects.LUCK)){
+                    chance+=Config.luck_extra_chance;
+                }
                 int chance2 = Config.log_buff_chance;
                 if (chance < chance2 + lootingLevel * lootingboost) {
                     int number = random.nextInt(4); //I know this isn't the most pretty code but it works.

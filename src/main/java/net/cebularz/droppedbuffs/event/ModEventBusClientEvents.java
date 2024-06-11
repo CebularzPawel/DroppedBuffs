@@ -6,6 +6,7 @@ import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Haste_Buff.Haste_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Heal_Buff.Heal_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Invisibility_Buff.Invisibility_Buff_Model;
+import net.cebularz.droppedbuffs.entity.client.Luck_Buff.Luck_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Meat_Buff.Meat_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
 import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Model;
@@ -29,6 +30,7 @@ public class ModEventBusClientEvents {
         event.registerLayerDefinition(ModModelLayers.STRENGTH_BUFF_LAYER, Strength_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.HASTE_BUFF_LAYER, Haste_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SPEED_BUFF_LAYER, Speed_Buff_Model::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.LUCK_BUFF_LAYER, Luck_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.BUFF_LAYER, Buff_Model::createBodyLayer);
 
     }
