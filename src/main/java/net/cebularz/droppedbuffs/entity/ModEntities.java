@@ -33,6 +33,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<Haste_Buff_Entity>> HASTE_BUFF_ENTITY =
             ENTITY_TYPES.register("haste_buff",()-> EntityType.Builder.of(Haste_Buff_Entity::new, MobCategory.MISC)
                     .sized(1.0f,1.0f).build("strength_buff"));
+    public static final RegistryObject<EntityType<Speed_Buff_Entity>> SPEED_BUFF_ENTITY =
+            ENTITY_TYPES.register("speed_buff",()-> EntityType.Builder.of(Speed_Buff_Entity::new, MobCategory.MISC)
+                    .sized(1.0f,1.0f).build("speed_buff"));
     public static final RegistryObject<EntityType<Buff_Entity>> BUFF_ENTITY =
             ENTITY_TYPES.register("buff" , () -> EntityType.Builder.of(Buff_Entity::new, MobCategory.MISC)
                     .sized(1F, 2F)
