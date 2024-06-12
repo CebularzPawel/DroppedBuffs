@@ -2,6 +2,7 @@ package net.cebularz.droppedbuffs;
 
 import com.mojang.logging.LogUtils;
 import net.cebularz.droppedbuffs.entity.ModEntities;
+import net.cebularz.droppedbuffs.entity.client.Absorption_Buff.Absorption_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Haste_Buff.Haste_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Heal_Buff.Heal_Buff_Renderer;
@@ -80,7 +81,7 @@ public class DroppedBuffs
             EntityRenderers.register(ModEntities.HASTE_BUFF_ENTITY.get(), Haste_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.SPEED_BUFF_ENTITY.get(), Speed_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.LUCK_BUFF_ENTITY.get(), Luck_Buff_Renderer::new);
-
+            EntityRenderers.register(ModEntities.ABSORPTION_BUFF_ENTITY.get(), Absorption_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
         }
     }

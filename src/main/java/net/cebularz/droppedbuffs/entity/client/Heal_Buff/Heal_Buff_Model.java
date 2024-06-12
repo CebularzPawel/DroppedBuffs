@@ -2,7 +2,6 @@ package net.cebularz.droppedbuffs.entity.client.Heal_Buff;// Made with Blockbenc
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
@@ -20,26 +19,28 @@ public class Heal_Buff_Model<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	public static LayerDefinition createBodyLayer() {
-		float totalHeight = 24.0F;
-
-		float centerOffsetY = totalHeight / 2;
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offsetAndRotation(5.0F, 25.0F, -1.0F, 0.0F, 0.0F, -0.7854F));
+		// Center the entire model at the origin (0,0,0)
+		PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offset(0.0F, 4, 0.0F));
 
-		PartDefinition cube_r1 = bone.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(2-1.0F, centerOffsetY-4.0F, 0.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.5F, -4.75F, 0.0F, 0.0F, 0.0F, -0.7854F));
+		PartDefinition cube_r1 = bone.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -4.0F, -1.5F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(3.5F, -3.75F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
-		PartDefinition cube_r2 = bone.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 7).addBox(2-1.0F, centerOffsetY-4.0F, 0.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, -4.75F, 0.0F, 0.0F, 0.0F, -0.7854F));
+		PartDefinition cube_r2 = bone.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 7).addBox(-1.0F, -4.0F, -1.5F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(-2.0F, -3.75F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
-		PartDefinition cube_r3 = bone.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(11, 11).addBox(2-1.0F, centerOffsetY-4.0F, 0.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.75F, -2.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
+		PartDefinition cube_r3 = bone.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(11, 11).addBox(-1.0F, -4.0F, -1.5F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)),
+				PartPose.offsetAndRotation(0.75F, -1.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		// Rotate the entire model around its center
+		this.bone.yRot = ageInTicks * 0.1F; // Example rotation speed
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
-public class Luck_Buff_Entity extends Entity {
+public class Absorption_Buff_Entity extends Entity {
     public Player owner;
 
 
@@ -25,7 +25,7 @@ public class Luck_Buff_Entity extends Entity {
     public float alpha;
     public float duration;
 
-    public Luck_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
+    public Absorption_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.age=0;
         this.owner=null;
@@ -82,10 +82,10 @@ public class Luck_Buff_Entity extends Entity {
 
         if (player==owner||owner==null||Config.global_drop) {
             if (!this.level().isClientSide) {
-                MobEffectInstance effect = new MobEffectInstance(MobEffects.LUCK,30*20,0);
+                MobEffectInstance effect = new MobEffectInstance(MobEffects.ABSORPTION,30*20,1);
                 player.addEffect(effect);
                 Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
-                buffEntity.setColorMultiplier(0x54e62c);
+                buffEntity.setColorMultiplier(0xffc919);
                 buffEntity.setPos(this.getX(), this.getY(), this.getZ());
                 buffEntity.setOwner(player);
                 this.level().addFreshEntity(buffEntity);

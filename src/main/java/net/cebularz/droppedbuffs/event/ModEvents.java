@@ -3,10 +3,8 @@ package net.cebularz.droppedbuffs.event;
 import net.cebularz.droppedbuffs.Config;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.entity.ModEntities;
-import net.cebularz.droppedbuffs.entity.custom.Invisibility_Buff_Entity;
-import net.cebularz.droppedbuffs.entity.custom.Meat_Buff_Entity;
-import net.cebularz.droppedbuffs.entity.custom.Resistance_Buff_Entity;
-import net.cebularz.droppedbuffs.entity.custom.Strength_Buff_Entity;
+import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Model;
+import net.cebularz.droppedbuffs.entity.custom.*;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -37,7 +35,7 @@ public class ModEvents {
                 }
                 int chance2 = Config.log_buff_chance;
                 if (chance < chance2 + lootingLevel * lootingboost) {
-                    int number = random.nextInt(4); //I know this isn't the most pretty code but it works.
+                    int number = random.nextInt(9); //I know this isn't the most pretty code but it works.
                     if (number == 0) {
                         Meat_Buff_Entity buffentity = new Meat_Buff_Entity(ModEntities.MEAT_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
@@ -58,6 +56,36 @@ public class ModEvents {
                     }
                     if (number == 3) {
                         Strength_Buff_Entity buffentity = new Strength_Buff_Entity(ModEntities.STRENGTH_BUFF_ENTITY.get(), event.getEntity().level());
+                        buffentity.owner = player;
+                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level().addFreshEntity(buffentity);
+                    }
+                    if (number == 4) {
+                        Haste_Buff_Entity buffentity = new Haste_Buff_Entity(ModEntities.HASTE_BUFF_ENTITY.get(), event.getEntity().level());
+                        buffentity.owner = player;
+                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level().addFreshEntity(buffentity);
+                    }
+                    if (number == 5) {
+                        Heal_Buff_Entity buffentity = new Heal_Buff_Entity(ModEntities.HEAL_BUFF_ENTITY.get(), event.getEntity().level());
+                        buffentity.owner = player;
+                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level().addFreshEntity(buffentity);
+                    }
+                    if (number == 6) {
+                        Luck_Buff_Entity buffentity = new Luck_Buff_Entity(ModEntities.LUCK_BUFF_ENTITY.get(), event.getEntity().level());
+                        buffentity.owner = player;
+                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level().addFreshEntity(buffentity);
+                    }
+                    if (number == 7) {
+                        Speed_Buff_Entity buffentity = new Speed_Buff_Entity(ModEntities.SPEED_BUFF_ENTITY.get(), event.getEntity().level());
+                        buffentity.owner = player;
+                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level().addFreshEntity(buffentity);
+                    }
+                    if (number == 8) {
+                        Absorption_Buff_Entity buffentity = new Absorption_Buff_Entity(ModEntities.ABSORPTION_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
