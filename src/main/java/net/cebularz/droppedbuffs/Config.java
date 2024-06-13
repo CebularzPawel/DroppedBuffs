@@ -51,6 +51,7 @@ public class Config
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
+
         log_buff_chance = LOG_BUFF_CHANCE.get();
         looting_extra_chance = LOOTING_EXTRA_CHANCE.get();
         global_drop = GLOBAL_DROP.get();

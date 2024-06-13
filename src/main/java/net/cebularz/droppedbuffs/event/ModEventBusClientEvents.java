@@ -12,6 +12,7 @@ import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
 import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Model;
+import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Model;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,6 +32,8 @@ public class ModEventBusClientEvents {
         event.registerLayerDefinition(ModModelLayers.HASTE_BUFF_LAYER, Haste_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.SPEED_BUFF_LAYER, Speed_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.LUCK_BUFF_LAYER, Luck_Buff_Model::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.WATER_BREATHING_BUFF_LAYER, Water_Breathing_Buff_Model::createBodyLayer);
+
         event.registerLayerDefinition(ModModelLayers.BUFF_LAYER, Buff_Model::createBodyLayer);
 
     }

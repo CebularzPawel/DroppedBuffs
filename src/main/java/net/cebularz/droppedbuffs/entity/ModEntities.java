@@ -42,6 +42,9 @@ public class ModEntities {
     public static final RegistryObject<EntityType<Absorption_Buff_Entity>> ABSORPTION_BUFF_ENTITY =
             ENTITY_TYPES.register("absorption_buff",()-> EntityType.Builder.of(Absorption_Buff_Entity::new, MobCategory.MISC)
                     .sized(0.5f,1.0f).build("absorption_buff"));
+    public static final RegistryObject<EntityType<Water_Breathing_Buff_Entity>> WATER_BREATHING_BUFF_ENTITY =
+            ENTITY_TYPES.register("water_breathing_buff",()-> EntityType.Builder.of(Water_Breathing_Buff_Entity::new, MobCategory.MISC)
+                    .sized(0.5f,1.0f).build("water_breathing_buff"));
     public static final RegistryObject<EntityType<Buff_Entity>> BUFF_ENTITY =
             ENTITY_TYPES.register("buff" , () -> EntityType.Builder.of(Buff_Entity::new, MobCategory.MISC)
                     .sized(1F, 2F)

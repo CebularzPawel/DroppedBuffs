@@ -12,6 +12,7 @@ import net.cebularz.droppedbuffs.entity.client.Meat_Buff.Meat_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Renderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -82,6 +83,7 @@ public class DroppedBuffs
             EntityRenderers.register(ModEntities.SPEED_BUFF_ENTITY.get(), Speed_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.LUCK_BUFF_ENTITY.get(), Luck_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.ABSORPTION_BUFF_ENTITY.get(), Absorption_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), Water_Breathing_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
         }
     }

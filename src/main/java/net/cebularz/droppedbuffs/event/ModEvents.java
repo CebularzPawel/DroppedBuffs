@@ -4,6 +4,7 @@ import net.cebularz.droppedbuffs.Config;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Model;
+import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.custom.*;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -12,6 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.WaterFluid;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -33,9 +36,16 @@ public class ModEvents {
                 if(player.hasEffect(MobEffects.LUCK)){
                     chance+=Config.luck_extra_chance;
                 }
+
                 int chance2 = Config.log_buff_chance;
                 if (chance < chance2 + lootingLevel * lootingboost) {
-                    int number = random.nextInt(9); //I know this isn't the most pretty code but it works.
+                    int number = random.nextInt(10); //I know this isn't the most pretty code but it works.
+                    while (number == 9 && !event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)) {
+                        number = random.nextInt(10);
+                    }
+
+
+
                     if (number == 0) {
                         Meat_Buff_Entity buffentity = new Meat_Buff_Entity(ModEntities.MEAT_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
@@ -90,7 +100,12 @@ public class ModEvents {
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-
+                    if (number == 9) {
+                        Water_Breathing_Buff_Entity buffentity = new Water_Breathing_Buff_Entity(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), event.getEntity().level());
+                        buffentity.owner = player;
+                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
+                        event.getEntity().level().addFreshEntity(buffentity);
+                    }
                 }
             }
         }
