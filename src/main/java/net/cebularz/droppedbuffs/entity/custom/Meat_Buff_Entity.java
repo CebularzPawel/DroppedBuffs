@@ -3,6 +3,8 @@ package net.cebularz.droppedbuffs.entity.custom;
 import net.cebularz.droppedbuffs.Config;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -88,6 +90,7 @@ public class Meat_Buff_Entity extends Entity {
                     buffEntity.setColorMultiplier(0xD87C3F);
                     buffEntity.setPos(this.getX(), this.getY(), this.getZ());
                     buffEntity.setOwner(player);
+                    this.level().playSound(null,this.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS,2.0F,1.0F);
                     this.level().addFreshEntity(buffEntity);
                     this.discard();
                 }

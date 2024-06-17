@@ -5,8 +5,6 @@ import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Random;
 
-public class Speed_Buff_Entity extends Entity {
+public class Basic_Buff_Entity extends Entity {
     public Player owner;
 
 
@@ -26,8 +24,10 @@ public class Speed_Buff_Entity extends Entity {
     public float rotationZ;
     public float alpha;
     public float duration;
+    private int color;
 
-    public Speed_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
+
+    public Basic_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.age=0;
         this.owner=null;
@@ -38,6 +38,9 @@ public class Speed_Buff_Entity extends Entity {
 
         alpha = 1F;
         duration = Config.buff_on_ground_duration*20;
+
+
+        color = 0xffffff;
     }
 
     @Override
@@ -84,10 +87,9 @@ public class Speed_Buff_Entity extends Entity {
 
         if (player==owner||owner==null||Config.global_drop) {
             if (!this.level().isClientSide) {
-                MobEffectInstance effect = new MobEffectInstance(MobEffects.MOVEMENT_SPEED,30*20,0);
-                player.addEffect(effect);
+                effect(player);
                 Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
-                buffEntity.setColorMultiplier(0x5cfffc);
+                buffEntity.setColorMultiplier(color);
                 buffEntity.setPos(this.getX(), this.getY(), this.getZ());
                 buffEntity.setOwner(player);
                 this.level().playSound(null,this.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS,2.0F,1.0F);
@@ -95,6 +97,9 @@ public class Speed_Buff_Entity extends Entity {
                 this.discard();
             }
         }
+    }
+    public static void effect(Player player){
+
     }
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {

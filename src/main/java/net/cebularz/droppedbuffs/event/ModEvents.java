@@ -19,6 +19,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -39,50 +40,59 @@ public class ModEvents {
 
                 int chance2 = Config.log_buff_chance;
                 if (chance < chance2 + lootingLevel * lootingboost) {
-                    int number = random.nextInt(10); //I know this isn't the most pretty code but it works.
-                    while (number == 9 && !event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)) {
+                    int number = random.nextInt(10);
+                    List<Boolean> Checklist = new ArrayList<>(Config.activelist);
+                    if(!event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)){
+                        Checklist.set(9,false);
+                    }
+                    boolean havetrue = Checklist.contains(true);
+
+                    while ((!Checklist.get(number)&&havetrue)) {
                         number = random.nextInt(10);
+                    }
+                    if(!havetrue){
+                        number=-1;
                     }
 
 
 
-                    if (number == 0) {
+                    if (number == 5) {
                         Meat_Buff_Entity buffentity = new Meat_Buff_Entity(ModEntities.MEAT_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 1) {
+                    if (number == 3) {
                         Invisibility_Buff_Entity buffentity = new Invisibility_Buff_Entity(ModEntities.INVISIBILITY_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 2) {
+                    if (number == 6) {
                         Resistance_Buff_Entity buffentity = new Resistance_Buff_Entity(ModEntities.RESISTANCE_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 3) {
+                    if (number == 8) {
                         Strength_Buff_Entity buffentity = new Strength_Buff_Entity(ModEntities.STRENGTH_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 4) {
+                    if (number == 1) {
                         Haste_Buff_Entity buffentity = new Haste_Buff_Entity(ModEntities.HASTE_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 5) {
+                    if (number == 2) {
                         Heal_Buff_Entity buffentity = new Heal_Buff_Entity(ModEntities.HEAL_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 6) {
+                    if (number == 4) {
                         Luck_Buff_Entity buffentity = new Luck_Buff_Entity(ModEntities.LUCK_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -94,7 +104,7 @@ public class ModEvents {
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
                     }
-                    if (number == 8) {
+                    if (number == 0) {
                         Absorption_Buff_Entity buffentity = new Absorption_Buff_Entity(ModEntities.ABSORPTION_BUFF_ENTITY.get(), event.getEntity().level());
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
@@ -105,6 +115,7 @@ public class ModEvents {
                         buffentity.owner = player;
                         buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
                         event.getEntity().level().addFreshEntity(buffentity);
+
                     }
                 }
             }
