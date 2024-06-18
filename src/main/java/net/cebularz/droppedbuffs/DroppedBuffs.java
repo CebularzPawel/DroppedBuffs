@@ -54,7 +54,6 @@ public class DroppedBuffs
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("HELLO FROM COMMON SETUP");
 
     }
 
