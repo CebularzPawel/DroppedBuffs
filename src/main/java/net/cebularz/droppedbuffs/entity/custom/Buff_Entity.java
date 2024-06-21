@@ -28,6 +28,7 @@ public class Buff_Entity extends Entity {
 
     @Override
     protected void defineSynchedData() {
+
         this.entityData.define(OWNER_ID, 0);
         this.entityData.define(TEXTURE_INDEX, 0);
         this.entityData.define(COLOR_MULTIPLIER, 0xFFFFFF);
@@ -117,8 +118,5 @@ public class Buff_Entity extends Entity {
         pCompound.putInt("ColorMultiplier", this.getColorMultiplier());
     }
 
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
+
 }
