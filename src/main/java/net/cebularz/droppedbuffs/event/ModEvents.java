@@ -6,6 +6,7 @@ import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.custom.*;
+import net.cebularz.droppedbuffs.init.BuffsList;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -40,83 +41,15 @@ public class ModEvents {
 
                 int chance2 = Config.log_buff_chance;
                 if (chance < chance2 + lootingLevel * lootingboost) {
-                    int number = random.nextInt(10);
-                    List<Boolean> Checklist = new ArrayList<>(Config.activelist);
-                    if(!event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)){
-                        Checklist.set(9,false);
-                    }
-                    boolean havetrue = Checklist.contains(true);
+                    int number = random.nextInt(BuffsList.classes.length);
 
-                    while ((!Checklist.get(number)&&havetrue)) {
-                        number = random.nextInt(10);
-                    }
-                    if(!havetrue){
-                        number=-1;
-                    }
+                    Basic_Buff_Entity selectedbuff=BuffsList.getBuffByIndex()
 
 
 
-                    if (number == 5) {
-                        Meat_Buff_Entity buffentity = new Meat_Buff_Entity(ModEntities.MEAT_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 3) {
-                        Invisibility_Buff_Entity buffentity = new Invisibility_Buff_Entity(ModEntities.INVISIBILITY_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 6) {
-                        Resistance_Buff_Entity buffentity = new Resistance_Buff_Entity(ModEntities.RESISTANCE_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 8) {
-                        Strength_Buff_Entity buffentity = new Strength_Buff_Entity(ModEntities.STRENGTH_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 1) {
-                        Haste_Buff_Entity buffentity = new Haste_Buff_Entity(ModEntities.HASTE_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 2) {
-                        Heal_Buff_Entity buffentity = new Heal_Buff_Entity(ModEntities.HEAL_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 4) {
-                        Luck_Buff_Entity buffentity = new Luck_Buff_Entity(ModEntities.LUCK_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 7) {
-                        Speed_Buff_Entity buffentity = new Speed_Buff_Entity(ModEntities.SPEED_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 0) {
-                        Absorption_Buff_Entity buffentity = new Absorption_Buff_Entity(ModEntities.ABSORPTION_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
-                    }
-                    if (number == 9) {
-                        Water_Breathing_Buff_Entity buffentity = new Water_Breathing_Buff_Entity(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), event.getEntity().level());
-                        buffentity.owner = player;
-                        buffentity.setPos(event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ());
-                        event.getEntity().level().addFreshEntity(buffentity);
 
-                    }
+
+
                 }
             }
         }

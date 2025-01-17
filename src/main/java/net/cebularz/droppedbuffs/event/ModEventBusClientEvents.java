@@ -9,7 +9,9 @@ import net.cebularz.droppedbuffs.entity.client.Invisibility_Buff.Invisibility_Bu
 import net.cebularz.droppedbuffs.entity.client.Luck_Buff.Luck_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Meat_Buff.Meat_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
+import net.cebularz.droppedbuffs.entity.client.Night_Vision_Buff.Night_Vision_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Model;
+import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Model;
@@ -33,6 +35,8 @@ public class ModEventBusClientEvents {
         event.registerLayerDefinition(ModModelLayers.SPEED_BUFF_LAYER, Speed_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.LUCK_BUFF_LAYER, Luck_Buff_Model::createBodyLayer);
         event.registerLayerDefinition(ModModelLayers.WATER_BREATHING_BUFF_LAYER, Water_Breathing_Buff_Model::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.NIGHT_VISION_BUFF_LAYER, Night_Vision_Buff_Model::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.FIRE_RESISTANCE_BUFF_LAYER, Resistance_Buff_Model::createBodyLayer);
 
         event.registerLayerDefinition(ModModelLayers.BUFF_LAYER, Buff_Model::createBodyLayer);
 

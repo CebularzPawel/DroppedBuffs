@@ -118,5 +118,8 @@ public class Buff_Entity extends Entity {
         pCompound.putInt("ColorMultiplier", this.getColorMultiplier());
     }
 
-
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
 }

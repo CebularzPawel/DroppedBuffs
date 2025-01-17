@@ -45,6 +45,12 @@ public class ModEntities {
     public static final RegistryObject<EntityType<Water_Breathing_Buff_Entity>> WATER_BREATHING_BUFF_ENTITY =
             ENTITY_TYPES.register("water_breathing_buff",()-> EntityType.Builder.of(Water_Breathing_Buff_Entity::new, MobCategory.MISC)
                     .sized(0.5f,1.0f).build("water_breathing_buff"));
+    public static final RegistryObject<EntityType<Night_Vision_Buff_Entity>> NIGHT_VISION_BUFF_ENTITY =
+            ENTITY_TYPES.register("night_vision_buff",()-> EntityType.Builder.of(Night_Vision_Buff_Entity::new, MobCategory.MISC)
+                    .sized(0.5f,1.0f).build("night_vision_buff"));
+    public static final RegistryObject<EntityType<Fire_Resistance_Buff_Entity>> FIRE_RESISTANCE_BUFF_ENTITY =
+            ENTITY_TYPES.register("fire_resistance_buff",()-> EntityType.Builder.of(Fire_Resistance_Buff_Entity::new, MobCategory.MISC)
+                    .sized(0.5f,1.0f).build("fire_resistance_buff"));
     public static final RegistryObject<EntityType<Buff_Entity>> BUFF_ENTITY =
             ENTITY_TYPES.register("buff" , () -> EntityType.Builder.of(Buff_Entity::new, MobCategory.MISC)
                     .sized(1F, 2F)

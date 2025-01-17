@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import java.util.Random;
 
@@ -75,7 +76,7 @@ public class Basic_Buff_Entity extends Entity {
 
         if (player == owner || owner == null || Config.global_drop) {
             if (!this.level().isClientSide) {
-                effect(player);
+                buffOnPickUpEffect(player);
                 Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
                 buffEntity.setColorMultiplier(color);
                 buffEntity.setPos(this.getX(), this.getY(), this.getZ());
@@ -87,8 +88,15 @@ public class Basic_Buff_Entity extends Entity {
         }
     }
 
-    protected void effect(Player player) {
+    public void buffOnPickUpEffect(Player player) {
         // Default effect
+    }
+    public static boolean canSpawn(LivingDeathEvent event){
+        return configactive;
+    }
+    public static boolean configactive = true;
+    public static void spawnBuff(Player player, LivingDeathEvent event){
+
     }
 
     @Override

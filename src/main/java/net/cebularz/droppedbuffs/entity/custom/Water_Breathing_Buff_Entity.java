@@ -11,10 +11,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import java.util.Random;
 
 public class Water_Breathing_Buff_Entity extends Basic_Buff_Entity {
+
+
 
     public Water_Breathing_Buff_Entity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -22,8 +26,25 @@ public class Water_Breathing_Buff_Entity extends Basic_Buff_Entity {
     }
 
     @Override
-    protected void effect(Player player) {
+    public void buffOnPickUpEffect(Player player) {
         MobEffectInstance effect = new MobEffectInstance(MobEffects.WATER_BREATHING,30*20,0);
         player.addEffect(effect);
+    }
+    public static boolean canSpawn(LivingDeathEvent event) {
+        if(!event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)){
+            return false;
+        }
+        return configactive;
+    }
+
+
+    public static void spawnBuff(Player player, LivingDeathEvent event) {
+        if(canSpawn(event)) {
+            Entity killedEntity = event.getEntity();
+            Water_Breathing_Buff_Entity buffentity = new Water_Breathing_Buff_Entity(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), killedEntity.level());
+            buffentity.owner = player;
+            buffentity.setPos(killedEntity.getX(), killedEntity.getY(), killedEntity.getZ());
+            killedEntity.level().addFreshEntity(buffentity);
+        }
     }
 }

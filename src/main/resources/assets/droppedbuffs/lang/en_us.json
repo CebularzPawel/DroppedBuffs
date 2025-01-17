@@ -9,5 +9,8 @@
   "entity.droppedbuffs.resistance_buff": "Resistance Buff",
   "entity.droppedbuffs.speed_buff": "Speed Buff",
   "entity.droppedbuffs.strength_buff": "Strength Buff",
-  "entity.droppedbuffs.water_breathing_buff": "Water Breathing Buff"
+  "entity.droppedbuffs.water_breathing_buff": "Water Breathing Buff",
+  "entity.droppedbuffs.night_vision_buff": "Night Vision Buff",
+  "entity.droppedbuffs.fire_resistance_buff": "Fire Resistance Buff"
+
 }

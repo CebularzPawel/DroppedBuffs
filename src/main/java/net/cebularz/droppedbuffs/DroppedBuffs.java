@@ -4,11 +4,13 @@ import com.mojang.logging.LogUtils;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.client.Absorption_Buff.Absorption_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Fire_Resistance_Buff.Fire_Resistance_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Haste_Buff.Haste_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Heal_Buff.Heal_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Invisibility_Buff.Invisibility_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Luck_Buff.Luck_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Meat_Buff.Meat_Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.client.Night_Vision_Buff.Night_Vision_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Renderer;
@@ -83,6 +85,9 @@ public class DroppedBuffs
             EntityRenderers.register(ModEntities.LUCK_BUFF_ENTITY.get(), Luck_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.ABSORPTION_BUFF_ENTITY.get(), Absorption_Buff_Renderer::new);
             EntityRenderers.register(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), Water_Breathing_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.NIGHT_VISION_BUFF_ENTITY.get(), Night_Vision_Buff_Renderer::new);
+            EntityRenderers.register(ModEntities.FIRE_RESISTANCE_BUFF_ENTITY.get(), Fire_Resistance_Buff_Renderer::new);
+
             EntityRenderers.register(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
         }
     }

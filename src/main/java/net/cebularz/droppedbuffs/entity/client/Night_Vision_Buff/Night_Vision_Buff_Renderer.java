@@ -1,4 +1,4 @@
-package net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff;
+package net.cebularz.droppedbuffs.entity.client.Night_Vision_Buff;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -6,9 +6,7 @@ import com.mojang.math.Axis;
 import net.cebularz.droppedbuffs.Config;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
-import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_Model;
-import net.cebularz.droppedbuffs.entity.custom.Resistance_Buff_Entity;
-import net.cebularz.droppedbuffs.entity.custom.Water_Breathing_Buff_Entity;
+import net.cebularz.droppedbuffs.entity.custom.Night_Vision_Buff_Entity;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,22 +15,22 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class Water_Breathing_Buff_Renderer extends EntityRenderer<Water_Breathing_Buff_Entity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/water_breathing_buff.png");
+public class Night_Vision_Buff_Renderer extends EntityRenderer<Night_Vision_Buff_Entity> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(DroppedBuffs.MOD_ID, "textures/entity/night_vision_buff.png");
 
-    private final Water_Breathing_Buff_Model<Water_Breathing_Buff_Entity> model;
-    public Water_Breathing_Buff_Renderer(EntityRendererProvider.Context context) {
+    private final Night_Vision_Buff_Model<Night_Vision_Buff_Entity> model;
+    public Night_Vision_Buff_Renderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new Water_Breathing_Buff_Model<>(context.bakeLayer(ModModelLayers.WATER_BREATHING_BUFF_LAYER));
+        this.model = new Night_Vision_Buff_Model<>(context.bakeLayer(ModModelLayers.NIGHT_VISION_BUFF_LAYER));
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Water_Breathing_Buff_Entity pEntity) {
+    public ResourceLocation getTextureLocation(Night_Vision_Buff_Entity pEntity) {
         return TEXTURE;
     }
 
     @Override
-    public void render(Water_Breathing_Buff_Entity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+    public void render(Night_Vision_Buff_Entity pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
         pPoseStack.pushPose();
         double bobOffset = Math.sin((pEntity.tickCount + pPartialTick) * 0.075) * 0.075;
@@ -40,7 +38,9 @@ public class Water_Breathing_Buff_Renderer extends EntityRenderer<Water_Breathin
         pPoseStack.mulPose(Axis.XP.rotationDegrees(pEntity.rotationX));
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.rotationY));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.rotationZ));
+
         float size = 1.5F* Config.buff_size;
+
         pPoseStack.scale( size, size,size);
 
         float alpha = pEntity.alpha;

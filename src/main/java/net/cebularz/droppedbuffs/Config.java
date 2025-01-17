@@ -1,5 +1,7 @@
 package net.cebularz.droppedbuffs;
 
+import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Renderer;
+import net.cebularz.droppedbuffs.entity.custom.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -39,6 +41,9 @@ public class Config
     private static final ForgeConfigSpec.IntValue BUFF_ON_GROUND_DURATION = BUILDER
             .comment("How long the buff should stay on the ground in seconds")
             .defineInRange("buff_on_ground_duration", 20,0,Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.DoubleValue BUFF_SIZE = BUILDER
+            .comment("Size of the buff (it only change visual model, not the hitbox)")
+            .defineInRange("buff_size", 1,0,Float.MAX_VALUE);
     private static final ForgeConfigSpec.BooleanValue ABSORPTION_BUFF = BUILDER
             .comment("Absorption Buff active")
             .define("absorption_buff",true);
@@ -69,6 +74,12 @@ public class Config
     private static final ForgeConfigSpec.BooleanValue WATER_BREATHING_BUFF = BUILDER
             .comment("Water Breathing Buff active")
             .define("water_breathing_buff",true);
+    private static final ForgeConfigSpec.BooleanValue NIGHT_VISION_BUFF = BUILDER
+            .comment("Night Vision Buff active")
+            .define("night_vision_buff",true);
+    private static final ForgeConfigSpec.BooleanValue FIRE_RESISTANCE_BUFF = BUILDER
+            .comment("Fire Resistance Buff active")
+            .define("fire_resistance_buff",true);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static int log_buff_chance;
@@ -76,6 +87,8 @@ public class Config
     public static int luck_extra_chance;
 
     public static boolean global_drop;
+    public static double buff_size_original;
+    public static float buff_size;
 
     public static int buff_on_ground_duration;
     public static List<Boolean> activelist;
@@ -89,18 +102,53 @@ public class Config
         global_drop = GLOBAL_DROP.get();
         buff_on_ground_duration = BUFF_ON_GROUND_DURATION.get();
         luck_extra_chance = LUCK_EXTRA_CHANCE.get();
-
-
+        buff_size_original = BUFF_SIZE.get();
+        buff_size= (float)buff_size_original;
         activelist = new ArrayList<>();
-        activelist.add(ABSORPTION_BUFF.get());
-        activelist.add(HASTE_BUFF.get());
-        activelist.add(HEAL_BUFF.get());
-        activelist.add(INVISIBILITY_BUFF.get());
-        activelist.add(LUCK_BUFF.get());
-        activelist.add(MEAT_BUFF.get());
-        activelist.add(RESISTANCE_BUFF.get());
-        activelist.add(SPEED_BUFF.get());
-        activelist.add(STRENGTH_BUFF.get());
-        activelist.add(WATER_BREATHING_BUFF.get());
+        if(!ABSORPTION_BUFF.get()){
+            Absorption_Buff_Entity.configactive=false;
+        }
+        if(!HASTE_BUFF.get()){
+            Haste_Buff_Entity.configactive=false;
+        }
+        if(!WATER_BREATHING_BUFF.get()){
+            Water_Breathing_Buff_Entity.configactive=false;
+        }
+        if(!HEAL_BUFF.get()){
+            Heal_Buff_Entity.configactive=false;
+        }
+        if(!INVISIBILITY_BUFF.get()){
+            Invisibility_Buff_Entity.configactive=false;
+        }
+        if(!LUCK_BUFF.get()){
+            Luck_Buff_Entity.configactive=false;
+        }
+        if(!MEAT_BUFF.get()){
+            Meat_Buff_Entity.configactive=false;
+        }
+        if(!RESISTANCE_BUFF.get()){
+            Resistance_Buff_Entity.configactive=false;
+        }
+        if(!SPEED_BUFF.get()){
+            Speed_Buff_Entity.configactive=false;
+        }
+        if(!STRENGTH_BUFF.get()){
+            Strength_Buff_Entity.configactive=false;
+        }
+        if(!NIGHT_VISION_BUFF.get()){
+            Night_Vision_Buff_Entity.configactive=false;
+        }
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(true);
+        activelist.add(FIRE_RESISTANCE_BUFF.get());
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import java.util.Random;
 
@@ -22,8 +23,22 @@ public class Luck_Buff_Entity extends Basic_Buff_Entity {
     }
 
     @Override
-    protected void effect(Player player) {
+    public void buffOnPickUpEffect(Player player) {
         MobEffectInstance effect = new MobEffectInstance(MobEffects.LUCK,30*20,0);
         player.addEffect(effect);
+    }
+
+    public static boolean canSpawn(LivingDeathEvent event) {
+        return configactive;
+    }
+
+    public static void spawnBuff(Player player, LivingDeathEvent event) {
+        if(canSpawn(event)) {
+            Entity killedEntity = event.getEntity();
+            Luck_Buff_Entity buffentity = new Luck_Buff_Entity(ModEntities.LUCK_BUFF_ENTITY.get(), killedEntity.level());
+            buffentity.owner = player;
+            buffentity.setPos(killedEntity.getX(), killedEntity.getY(), killedEntity.getZ());
+            killedEntity.level().addFreshEntity(buffentity);
+        }
     }
 }

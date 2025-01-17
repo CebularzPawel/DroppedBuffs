@@ -3,6 +3,7 @@ package net.cebularz.droppedbuffs.entity.client.Luck_Buff;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import net.cebularz.droppedbuffs.Config;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
 import net.cebularz.droppedbuffs.entity.client.Luck_Buff.Luck_Buff_Model;
@@ -38,7 +39,7 @@ public class Luck_Buff_Renderer extends EntityRenderer<Luck_Buff_Entity> {
         pPoseStack.mulPose(Axis.XP.rotationDegrees(pEntity.rotationX));
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.rotationY));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.rotationZ));
-        float size = 1.5F;
+        float size = 1.5F* Config.buff_size;
         pPoseStack.scale( size, size,size);
 
         float alpha = pEntity.alpha;
