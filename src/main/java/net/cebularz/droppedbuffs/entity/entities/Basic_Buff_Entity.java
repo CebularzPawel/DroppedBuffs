@@ -123,10 +123,6 @@ public class Basic_Buff_Entity extends Entity {
     public void buffOnPickUpEffect(Player player) {
         // Default effect
     }
-    public static boolean canSpawn(LivingDeathEvent event){
-        return configactive;
-    }
-    public static boolean configactive = true;
     public static void spawnBuff(Player player, LivingDeathEvent event){
 
     }

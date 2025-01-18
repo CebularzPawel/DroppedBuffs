@@ -12,10 +12,4 @@ public class Water_Breathing_Buff_Entity extends Basic_Buff_Entity {
         this.color = new WaterBreathingBuff().getColor();
     }
 
-    public static boolean canSpawn(LivingDeathEvent event) {
-        if(!event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)){
-            return false;
-        }
-        return configactive;
-    }
 }

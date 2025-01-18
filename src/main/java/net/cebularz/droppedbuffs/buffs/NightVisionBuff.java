@@ -7,6 +7,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.LightLayer;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class NightVisionBuff extends AbstractBuff {
     private static final int color = 0x9115c2;
@@ -24,5 +26,14 @@ public class NightVisionBuff extends AbstractBuff {
     @Override
     public EntityType<? extends Basic_Buff_Entity> getEntityType() {
         return ModEntities.NIGHT_VISION_BUFF_ENTITY.get();
+    }
+
+    @Override
+    public boolean canSpawn(LivingDeathEvent event) {
+        int lightlevel = event.getEntity().level().getBrightness(LightLayer.BLOCK,event.getEntity().blockPosition())+event.getEntity().level().getBrightness(LightLayer.SKY,event.getEntity().blockPosition());
+        if (lightlevel>5){
+            return false;
+        }
+        return configactive;
     }
 }

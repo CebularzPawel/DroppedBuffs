@@ -57,7 +57,7 @@ public class ModEvents {
 
 
         public static void dropBuff(Player killer, LivingDeathEvent event, Buff buff) {
-            if (Basic_Buff_Entity.configactive) {
+            if (buff.canSpawn(event)) {
                 Entity killedEntity = event.getEntity();
                 if (buff != null) {
                     Basic_Buff_Entity buffEntity = buff.getEntityType().create(killedEntity.level());
@@ -67,6 +67,12 @@ public class ModEvents {
                         buffEntity.setPos(killedEntity.getX(), killedEntity.getY(), killedEntity.getZ());
                         killedEntity.level().addFreshEntity(buffEntity);
                     }
+                }
+            }
+            else{
+                Buff randomBuff = getRandomBuff();
+                if (randomBuff != null) {
+                    dropBuff(killer, event, randomBuff);
                 }
             }
         }

@@ -11,7 +11,4 @@ public class Absorption_Buff_Entity extends Basic_Buff_Entity {
         this.color= new AbsorptionBuff().getColor();
     }
 
-    public static boolean canSpawn(LivingDeathEvent event) {
-        return configactive;
-    }
 }

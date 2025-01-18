@@ -12,11 +12,5 @@ public class Night_Vision_Buff_Entity extends Basic_Buff_Entity {
         this.color = new NightVisionBuff().getColor();
     }
 
-    public static boolean canSpawn(LivingDeathEvent event) {
-        int lightlevel = event.getEntity().level().getBrightness(LightLayer.BLOCK,event.getEntity().blockPosition())+event.getEntity().level().getBrightness(LightLayer.SKY,event.getEntity().blockPosition());
-        if (lightlevel>5){
-            return false;
-        }
-        return configactive;
-    }
+
 }

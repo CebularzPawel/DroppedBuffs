@@ -11,7 +11,4 @@ public class Haste_Buff_Entity extends Basic_Buff_Entity {
         this.color = new HasteBuff().getColor();
     }
 
-    public static boolean canSpawn(LivingDeathEvent event) {
-        return configactive;
-    }
 }

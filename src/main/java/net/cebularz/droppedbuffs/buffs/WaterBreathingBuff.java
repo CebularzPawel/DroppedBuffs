@@ -7,6 +7,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class WaterBreathingBuff extends AbstractBuff {
     private static final int color = 0x058fff;
@@ -24,5 +26,13 @@ public class WaterBreathingBuff extends AbstractBuff {
     @Override
     public EntityType<? extends Basic_Buff_Entity> getEntityType() {
         return ModEntities.WATER_BREATHING_BUFF_ENTITY.get();
+    }
+
+    @Override
+    public boolean canSpawn(LivingDeathEvent event) {
+        if(!event.getEntity().level().getFluidState(event.getEntity().blockPosition()).is(Fluids.WATER)){
+            return false;
+        }
+        return configactive;
     }
 }

@@ -1,5 +1,6 @@
 package net.cebularz.droppedbuffs;
 
+import net.cebularz.droppedbuffs.buffs.*;
 import net.cebularz.droppedbuffs.entity.entities.*;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -83,7 +84,6 @@ public class Config
     public static float buff_size;
 
     public static int buff_on_ground_duration;
-    public static List<Boolean> activelist;
 
 
     @SubscribeEvent
@@ -96,51 +96,41 @@ public class Config
         luck_extra_chance = LUCK_EXTRA_CHANCE.get();
         buff_size_original = BUFF_SIZE.get();
         buff_size= (float)buff_size_original;
-        activelist = new ArrayList<>();
         if(!ABSORPTION_BUFF.get()){
-            Absorption_Buff_Entity.configactive=false;
+            AbsorptionBuff.configactive=false;
         }
         if(!HASTE_BUFF.get()){
-            Haste_Buff_Entity.configactive=false;
+            HasteBuff.configactive=false;
         }
         if(!WATER_BREATHING_BUFF.get()){
-            Water_Breathing_Buff_Entity.configactive=false;
+            WaterBreathingBuff.configactive=false;
         }
         if(!HEAL_BUFF.get()){
-            Heal_Buff_Entity.configactive=false;
+            HealBuff.configactive=false;
         }
         if(!INVISIBILITY_BUFF.get()){
-            Invisibility_Buff_Entity.configactive=false;
+            InvisibilityBuff.configactive=false;
         }
         if(!LUCK_BUFF.get()){
-            Luck_Buff_Entity.configactive=false;
+            LuckBuff.configactive=false;
         }
         if(!MEAT_BUFF.get()){
-            Meat_Buff_Entity.configactive=false;
+            MeatBuff.configactive=false;
         }
         if(!RESISTANCE_BUFF.get()){
-            Resistance_Buff_Entity.configactive=false;
+            ResistanceBuff.configactive=false;
         }
         if(!SPEED_BUFF.get()){
-            Speed_Buff_Entity.configactive=false;
+            SpeedBuff.configactive=false;
         }
         if(!STRENGTH_BUFF.get()){
-            Strength_Buff_Entity.configactive=false;
+            StrengthBuff.configactive=false;
         }
         if(!NIGHT_VISION_BUFF.get()){
-            Night_Vision_Buff_Entity.configactive=false;
+            NightVisionBuff.configactive=false;
         }
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(true);
-        activelist.add(FIRE_RESISTANCE_BUFF.get());
+        if(!FIRE_RESISTANCE_BUFF.get()){
+            FireResistanceBuff.configactive=false;
+        }
     }
 }

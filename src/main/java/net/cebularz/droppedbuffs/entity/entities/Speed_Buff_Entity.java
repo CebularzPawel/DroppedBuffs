@@ -11,7 +11,4 @@ public class Speed_Buff_Entity extends Basic_Buff_Entity {
         this.color = new SpeedBuff().getColor();
     }
 
-    public static boolean canSpawn(LivingDeathEvent event) {
-        return configactive;
-    }
 }

@@ -11,7 +11,4 @@ public class Resistance_Buff_Entity extends Basic_Buff_Entity {
         this.color = new ResistanceBuff().getColor();
     }
 
-    public static boolean canSpawn(LivingDeathEvent event) {
-        return configactive;
-    }
 }
