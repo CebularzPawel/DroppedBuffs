@@ -1,6 +1,9 @@
 package net.cebularz.droppedbuffs;
 
 import com.mojang.logging.LogUtils;
+import net.cebularz.droppedbuffs.api.Buff;
+import net.cebularz.droppedbuffs.api.BuffRegistry;
+import net.cebularz.droppedbuffs.buffs.*;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.client.Absorption_Buff.Absorption_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Buff.Buff_Renderer;
@@ -16,6 +19,7 @@ import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Renderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -54,9 +58,42 @@ public class DroppedBuffs
 
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        Buff absorptionBuff = new AbsorptionBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "absorption"), absorptionBuff);
 
+        Buff fireResistBuff = new FireResistanceBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "fireresist"), fireResistBuff);
+
+        Buff hasteBuff = new HasteBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "haste"), hasteBuff);
+
+        Buff healBuff = new HealBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "heal"), healBuff);
+
+        Buff invisibilityBuff = new InvisibilityBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "invisibility"), invisibilityBuff);
+
+        Buff luckBuff = new LuckBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "luck"), luckBuff);
+
+        Buff meatBuff = new MeatBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "meat"), meatBuff);
+
+        Buff nightVisionBuff = new NightVisionBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "nightvision"), nightVisionBuff);
+
+        Buff resistBuff = new ResistanceBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "resist"), resistBuff);
+
+        Buff speedBuff = new SpeedBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "speed"), speedBuff);
+
+        Buff strengthBuff = new StrengthBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "strength"), strengthBuff);
+
+        Buff waterBreathingBuff = new WaterBreathingBuff();
+        BuffRegistry.register(new ResourceLocation(MOD_ID, "waterbreathing"), waterBreathingBuff);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)

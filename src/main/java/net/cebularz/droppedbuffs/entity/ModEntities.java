@@ -1,7 +1,7 @@
 package net.cebularz.droppedbuffs.entity;
 
 import net.cebularz.droppedbuffs.DroppedBuffs;
-import net.cebularz.droppedbuffs.entity.custom.*;
+import net.cebularz.droppedbuffs.entity.entities.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;

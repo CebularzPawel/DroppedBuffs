@@ -1,4 +1,4 @@
-package net.cebularz.droppedbuffs.entity.custom;
+package net.cebularz.droppedbuffs.entity.entities;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

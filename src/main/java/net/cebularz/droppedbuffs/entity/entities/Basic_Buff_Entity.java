@@ -1,8 +1,11 @@
-package net.cebularz.droppedbuffs.entity.custom;
+package net.cebularz.droppedbuffs.entity.entities;
 
 import net.cebularz.droppedbuffs.Config;
+import net.cebularz.droppedbuffs.api.Buff;
+import net.cebularz.droppedbuffs.api.BuffRegistry;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -14,6 +17,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import java.util.Random;
 
 public class Basic_Buff_Entity extends Entity {
+    private ResourceLocation buffId;
     public Player owner;
 
     public float bobOffset;
@@ -37,7 +41,15 @@ public class Basic_Buff_Entity extends Entity {
         alpha = 1F;
         duration = Config.buff_on_ground_duration * 20;
 
-        color = 0xffffff; // Default color
+        color = 0xffffff;
+    }
+
+    public void setBuffId(ResourceLocation buffId) {
+        this.buffId = buffId;
+    }
+
+    public Buff getBuff() {
+        return BuffRegistry.getBuff(this.buffId);
     }
 
     @Override
@@ -68,6 +80,16 @@ public class Basic_Buff_Entity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
+        if (compoundTag.contains("BuffID")) {
+            buffId = new ResourceLocation(compoundTag.getString("BuffID"));
+        }
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag compoundTag) {
+        if (buffId != null) {
+            compoundTag.putString("BuffID", buffId.toString());
+        }
     }
 
     @Override
@@ -76,13 +98,23 @@ public class Basic_Buff_Entity extends Entity {
 
         if (player == owner || owner == null || Config.global_drop) {
             if (!this.level().isClientSide) {
-                buffOnPickUpEffect(player);
-                Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
-                buffEntity.setColorMultiplier(color);
-                buffEntity.setPos(this.getX(), this.getY(), this.getZ());
-                buffEntity.setOwner(player);
-                this.level().playSound(null, this.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS, 2.0F, 1.0F);
-                this.level().addFreshEntity(buffEntity);
+                Buff buff = this.getBuff();
+                if (buff != null) {
+                    buff.onPickup(player);
+
+                    Buff_Entity buffEntity = new Buff_Entity(ModEntities.BUFF_ENTITY.get(), this.level());
+                    buffEntity.setColorMultiplier(buff.getColor());
+                    buffEntity.setPos(this.getX(), this.getY(), this.getZ());
+                    buffEntity.setOwner(player);
+
+                    this.level().playSound(null,
+                            this.blockPosition(),
+                            SoundEvents.AMETHYST_BLOCK_RESONATE,
+                            SoundSource.BLOCKS,
+                            2.0F,
+                            1.0F);
+                    this.level().addFreshEntity(buffEntity);
+                }
                 this.discard();
             }
         }
@@ -97,9 +129,5 @@ public class Basic_Buff_Entity extends Entity {
     public static boolean configactive = true;
     public static void spawnBuff(Player player, LivingDeathEvent event){
 
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
     }
 }
