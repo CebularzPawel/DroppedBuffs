@@ -11,7 +11,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class StrengthBuff extends AbstractBuff {
     private static final int color = 0x9c2703;
-
+    public static boolean configactive = true;
     @Override
     public void onPickup(Player player) {
         player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 30 * 20, 0));

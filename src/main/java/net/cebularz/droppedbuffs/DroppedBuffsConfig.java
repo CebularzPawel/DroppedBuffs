@@ -1,19 +1,15 @@
 package net.cebularz.droppedbuffs;
 
 import net.cebularz.droppedbuffs.buffs.*;
-import net.cebularz.droppedbuffs.entity.entities.*;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Forge's config APIs
 @Mod.EventBusSubscriber(modid = DroppedBuffs.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class Config
+public class DroppedBuffsConfig
 {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
@@ -37,6 +33,9 @@ public class Config
     private static final ForgeConfigSpec.DoubleValue BUFF_SIZE = BUILDER
             .comment("Size of the buff (it only change visual model, not the hitbox)")
             .defineInRange("buff_size", 1,0,Float.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue BUFF_EFFECT_DURATION = BUILDER
+            .comment("Duration (in seconds) of an effect got from a buff (applies only to buffs that gives effects with a duration)")
+            .defineInRange("buff_effect_duration", 30,0,Integer.MAX_VALUE);
     private static final ForgeConfigSpec.BooleanValue ABSORPTION_BUFF = BUILDER
             .comment("Absorption Buff active")
             .define("absorption_buff",true);
@@ -73,6 +72,15 @@ public class Config
     private static final ForgeConfigSpec.BooleanValue FIRE_RESISTANCE_BUFF = BUILDER
             .comment("Fire Resistance Buff active")
             .define("fire_resistance_buff",true);
+    private static final ForgeConfigSpec.IntValue HEALING_VALUE = BUILDER
+            .comment("Amount of healing in hp you will get from healing buff")
+            .defineInRange("healing_value", 10,0,Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue FOOD_VALUE = BUILDER
+            .comment("Amount of hunger points restored from a meat buff")
+            .defineInRange("food_value", 8,0,Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue SATURATION_VALUE = BUILDER
+            .comment("Amount of saturation points restored from a meat buff")
+            .defineInRange("saturation_value", 6,0,Integer.MAX_VALUE);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static int log_buff_chance;
@@ -85,6 +93,12 @@ public class Config
 
     public static int buff_on_ground_duration;
 
+    public static int buff_effect_duration;
+
+    public static int heal_value;
+
+    public static int food_value;
+    public static int saturation_value;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
@@ -96,6 +110,13 @@ public class Config
         luck_extra_chance = LUCK_EXTRA_CHANCE.get();
         buff_size_original = BUFF_SIZE.get();
         buff_size= (float)buff_size_original;
+
+        buff_effect_duration = BUFF_EFFECT_DURATION.get();
+
+        heal_value = HEALING_VALUE.get();
+        food_value = FOOD_VALUE.get();
+        saturation_value = SATURATION_VALUE.get();
+
         if(!ABSORPTION_BUFF.get()){
             AbsorptionBuff.configactive=false;
         }

@@ -1,5 +1,6 @@
 package net.cebularz.droppedbuffs.buffs;
 
+import net.cebularz.droppedbuffs.DroppedBuffsConfig;
 import net.cebularz.droppedbuffs.api.AbstractBuff;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.entities.Basic_Buff_Entity;
@@ -11,10 +12,10 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class AbsorptionBuff extends AbstractBuff {
     private static final int color = 0xffc919;
-
+    public static boolean configactive = true;
     @Override
     public void onPickup(Player player) {
-        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 1));
+        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, DroppedBuffsConfig.buff_effect_duration * 20, 1));
     }
 
     @Override

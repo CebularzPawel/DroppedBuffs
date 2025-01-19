@@ -54,7 +54,7 @@ public class DroppedBuffs
 
         modEventBus.addListener(this::addCreative);
         ModEntities.register(modEventBus);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DroppedBuffsConfig.SPEC);
 
     }
 

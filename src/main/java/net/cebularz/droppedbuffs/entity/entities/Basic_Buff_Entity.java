@@ -1,6 +1,6 @@
 package net.cebularz.droppedbuffs.entity.entities;
 
-import net.cebularz.droppedbuffs.Config;
+import net.cebularz.droppedbuffs.DroppedBuffsConfig;
 import net.cebularz.droppedbuffs.api.Buff;
 import net.cebularz.droppedbuffs.api.BuffRegistry;
 import net.cebularz.droppedbuffs.entity.ModEntities;
@@ -39,7 +39,7 @@ public class Basic_Buff_Entity extends Entity {
         rotationZ = random.nextFloat() * 360.0F;
 
         alpha = 1F;
-        duration = Config.buff_on_ground_duration * 20;
+        duration = DroppedBuffsConfig.buff_on_ground_duration * 20;
 
         color = 0xffffff;
     }
@@ -96,7 +96,7 @@ public class Basic_Buff_Entity extends Entity {
     public void playerTouch(Player player) {
         super.playerTouch(player);
 
-        if (player == owner || owner == null || Config.global_drop) {
+        if (player == owner || owner == null || DroppedBuffsConfig.global_drop) {
             if (!this.level().isClientSide) {
                 Buff buff = this.getBuff();
                 if (buff != null) {

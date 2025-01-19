@@ -1,5 +1,6 @@
 package net.cebularz.droppedbuffs.buffs;
 
+import net.cebularz.droppedbuffs.DroppedBuffsConfig;
 import net.cebularz.droppedbuffs.api.AbstractBuff;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.entity.entities.Basic_Buff_Entity;
@@ -12,10 +13,10 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class WaterBreathingBuff extends AbstractBuff {
     private static final int color = 0x058fff;
-
+    public static boolean configactive = true;
     @Override
     public void onPickup(Player player) {
-        player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 30 * 20, 0));
+        player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, DroppedBuffsConfig.buff_effect_duration * 20, 0));
     }
 
     @Override

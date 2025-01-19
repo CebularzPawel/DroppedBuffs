@@ -1,6 +1,6 @@
 package net.cebularz.droppedbuffs.event;
 
-import net.cebularz.droppedbuffs.Config;
+import net.cebularz.droppedbuffs.DroppedBuffsConfig;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.api.Buff;
 import net.cebularz.droppedbuffs.api.BuffRegistry;
@@ -14,7 +14,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -29,15 +28,14 @@ public class ModEvents {
             if (entity instanceof Player player) {
                 int chance = random.nextInt(100);
                 int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, player.getMainHandItem());
-                int lootingboost = Config.looting_extra_chance;
+                int lootingboost = DroppedBuffsConfig.looting_extra_chance;
                 if(player.hasEffect(MobEffects.LUCK)){
-                    chance+=Config.luck_extra_chance;
+                    chance+= DroppedBuffsConfig.luck_extra_chance;
                 }
 
-                int chance2 = Config.log_buff_chance;
+                int chance2 = DroppedBuffsConfig.log_buff_chance;
                 if (chance < chance2 + lootingLevel * lootingboost) {
-                    System.out.println("Buff Spawn!");
-                    Buff randomBuff = getRandomBuff();
+                    Buff randomBuff = getRandomBuff(event);
                     if (randomBuff != null) {
                         dropBuff(player, event, randomBuff);
                     }
@@ -45,14 +43,24 @@ public class ModEvents {
             }
         }
 
-        public static Buff getRandomBuff() {
+        public static Buff getRandomBuff(LivingDeathEvent event) {
             Collection<Buff> allBuffs = BuffRegistry.getAllBuffs();
             if (allBuffs.isEmpty()) {
                 return null;
             }
-            List<Buff> buffList = new ArrayList<>(allBuffs);
+            List<Buff> validBuffs = allBuffs.stream()
+                    .filter(buff -> buff.canSpawn(event))
+                    .toList();
+
+            if (validBuffs.isEmpty()) {
+                return null;
+            }
+
             Random random = new Random();
-            return buffList.get(random.nextInt(buffList.size()));
+
+            Buff buff = validBuffs.get(random.nextInt(validBuffs.size()));
+
+            return buff;
         }
 
 

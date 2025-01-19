@@ -3,7 +3,7 @@ package net.cebularz.droppedbuffs.entity.client.Speed_Buff;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.cebularz.droppedbuffs.Config;
+import net.cebularz.droppedbuffs.DroppedBuffsConfig;
 import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.entity.client.ModModelLayers;
 import net.cebularz.droppedbuffs.entity.entities.Speed_Buff_Entity;
@@ -38,7 +38,7 @@ public class Speed_Buff_Renderer extends EntityRenderer<Speed_Buff_Entity> {
         pPoseStack.mulPose(Axis.XP.rotationDegrees(pEntity.rotationX));
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.rotationY));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pEntity.rotationZ));
-        float size = 1.0F* Config.buff_size;
+        float size = 1.0F* DroppedBuffsConfig.buff_size;
         pPoseStack.scale( size, size,size);
 
         float alpha = pEntity.alpha;
