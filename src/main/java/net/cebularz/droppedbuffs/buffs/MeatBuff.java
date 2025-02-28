@@ -23,7 +23,7 @@ public class MeatBuff extends AbstractBuff {
 
     @Override
     public EntityType<? extends Basic_Buff_Entity> getEntityType() {
-        return ModEntities.HASTE_BUFF_ENTITY.get();
+        return ModEntities.MEAT_BUFF_ENTITY.get();
     }
 
     @Override

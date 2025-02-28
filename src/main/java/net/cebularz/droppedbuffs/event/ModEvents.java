@@ -69,7 +69,6 @@ public class ModEvents {
             if (buff != null) {
                 Basic_Buff_Entity buffEntity = buff.getEntityType().create(killedEntity.level());
                 if (buffEntity != null) {
-                    buffEntity.setBuffId(buff.getId());
                     buffEntity.owner = killer;
                     buffEntity.setPos(killedEntity.getX(), killedEntity.getY(), killedEntity.getZ());
                     killedEntity.level().addFreshEntity(buffEntity);

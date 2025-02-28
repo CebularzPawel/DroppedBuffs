@@ -126,4 +126,5 @@ public class Basic_Buff_Entity extends Entity {
     public static void spawnBuff(Player player, LivingDeathEvent event){
 
     }
+
 }
