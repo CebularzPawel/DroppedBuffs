@@ -1,0 +1,11 @@
+{
+  "buff_pickup": {
+    "subtitles": "sounds.droppedbuffs.buff_pickup",
+    "sounds": [
+      "droppedbuffs:buff_pickup_0",
+      "droppedbuffs:buff_pickup_1",
+      "droppedbuffs:buff_pickup_2",
+      "droppedbuffs:buff_pickup_3"
+    ]
+  }
+}

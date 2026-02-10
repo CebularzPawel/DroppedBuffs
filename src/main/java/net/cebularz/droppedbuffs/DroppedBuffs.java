@@ -18,6 +18,7 @@ import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_R
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Renderer;
+import net.cebularz.droppedbuffs.sound.ModSounds;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -54,6 +55,7 @@ public class DroppedBuffs
 
         modEventBus.addListener(this::addCreative);
         ModEntities.register(modEventBus);
+        ModSounds.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DroppedBuffsConfig.SPEC);
 
     }

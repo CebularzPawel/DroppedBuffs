@@ -32,7 +32,7 @@ public class DroppedBuffsConfig
             .defineInRange("buff_on_ground_duration", 20,0,Integer.MAX_VALUE);
     private static final ForgeConfigSpec.DoubleValue BUFF_SIZE = BUILDER
             .comment("Size of the buff (it only change visual model, not the hitbox)")
-            .defineInRange("buff_size", 1,0,Float.MAX_VALUE);
+            .defineInRange("buff_size", 0.9f,0,Float.MAX_VALUE);
     private static final ForgeConfigSpec.IntValue BUFF_EFFECT_DURATION = BUILDER
             .comment("Duration (in seconds) of an effect got from a buff (applies only to buffs that gives effects with a duration)")
             .defineInRange("buff_effect_duration", 30,0,Integer.MAX_VALUE);

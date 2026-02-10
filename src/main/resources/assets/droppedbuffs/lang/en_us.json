@@ -11,6 +11,6 @@
   "entity.droppedbuffs.strength_buff": "Strength Buff",
   "entity.droppedbuffs.water_breathing_buff": "Water Breathing Buff",
   "entity.droppedbuffs.night_vision_buff": "Night Vision Buff",
-  "entity.droppedbuffs.fire_resistance_buff": "Fire Resistance Buff"
-
+  "entity.droppedbuffs.fire_resistance_buff": "Fire Resistance Buff",
+  "sounds.droppedbuffs.buff_pickup": "Buffs was picked up"
 }
