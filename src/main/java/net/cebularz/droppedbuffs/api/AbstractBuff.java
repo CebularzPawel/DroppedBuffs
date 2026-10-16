@@ -1,20 +1,20 @@
 package net.cebularz.droppedbuffs.api;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public abstract class AbstractBuff implements Buff {
-    protected ResourceLocation id;
+    protected Identifier id;
 
     public static boolean configactive = true;
 
 
     @Override
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return id;
     }
 
     @Override
-    public void setId(ResourceLocation id) {
+    public void setId(Identifier id) {
         this.id = id;
     }
 }

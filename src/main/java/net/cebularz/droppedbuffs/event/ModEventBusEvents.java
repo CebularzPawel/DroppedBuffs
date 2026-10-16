@@ -2,9 +2,9 @@ package net.cebularz.droppedbuffs.event;
 
 
 import net.cebularz.droppedbuffs.DroppedBuffs;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid=DroppedBuffs.MOD_ID,bus=Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid=DroppedBuffs.MOD_ID)
 public class ModEventBusEvents {
 
 

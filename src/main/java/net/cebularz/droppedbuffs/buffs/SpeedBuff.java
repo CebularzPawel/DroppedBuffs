@@ -8,14 +8,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 public class SpeedBuff extends AbstractBuff {
     private static final int color = 0x5cfffc;
     public static boolean configactive = true;
     @Override
     public void onPickup(Player player) {
-        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, DroppedBuffsConfig.buff_effect_duration * 20, 0));
+        player.addEffect(new MobEffectInstance(MobEffects.SPEED, DroppedBuffsConfig.buff_effect_duration * 20, 0));
     }
 
     @Override

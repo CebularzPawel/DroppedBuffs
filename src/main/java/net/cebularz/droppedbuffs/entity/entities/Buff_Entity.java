@@ -1,16 +1,16 @@
 package net.cebularz.droppedbuffs.entity.entities;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkHooks;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public class Buff_Entity extends Entity {
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(Buff_Entity.class, EntityDataSerializers.INT);
@@ -27,11 +27,21 @@ public class Buff_Entity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
 
-        this.entityData.define(OWNER_ID, 0);
-        this.entityData.define(TEXTURE_INDEX, 0);
-        this.entityData.define(COLOR_MULTIPLIER, 0xFFFFFF);
+        builder.define(OWNER_ID, 0);
+        builder.define(TEXTURE_INDEX, 0);
+        builder.define(COLOR_MULTIPLIER, 0xFFFFFF);
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel level, DamageSource source, float damage) {
+        // Same as the default Entity#hurt behavior from 1.20.1
+        if (this.isInvulnerableToBase(source)) {
+            return false;
+        }
+        this.markHurt();
+        return false;
     }
 
     public void setOwner(Player owner) {
@@ -41,7 +51,7 @@ public class Buff_Entity extends Entity {
     }
 
     public Player getOwner() {
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             return (Player) this.level().getEntity(this.entityData.get(OWNER_ID));
         }
         return this.owner;
@@ -53,7 +63,7 @@ public class Buff_Entity extends Entity {
 
         age = this.tickCount;
 
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             textureTickCounter++;
             int framesPerTick = 2;
             if (textureTickCounter >= 1) {
@@ -107,19 +117,12 @@ public class Buff_Entity extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag pCompound) {
-        if (pCompound.contains("ColorMultiplier")) {
-            this.entityData.set(COLOR_MULTIPLIER, pCompound.getInt("ColorMultiplier"));
-        }
+    protected void readAdditionalSaveData(ValueInput input) {
+        input.getInt("ColorMultiplier").ifPresent(color -> this.entityData.set(COLOR_MULTIPLIER, color));
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag pCompound) {
-        pCompound.putInt("ColorMultiplier", this.getColorMultiplier());
-    }
-
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
+    protected void addAdditionalSaveData(ValueOutput output) {
+        output.putInt("ColorMultiplier", this.getColorMultiplier());
     }
 }

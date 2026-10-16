@@ -1,9 +1,6 @@
 package net.cebularz.droppedbuffs.entity.client.Buff;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,14 +9,15 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.resources.Identifier;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 
-public class Buff_Model<T extends Entity> extends HierarchicalModel<T> {
-    //public static final ModelLayerLocation BUFF_LAYER = new ModelLayerLocation(new ResourceLocation("modid", "buff"), "main");
+public class Buff_Model<T extends EntityRenderState> extends EntityModel<T> {
+    //public static final ModelLayerLocation BUFF_LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("modid", "buff"), "main");
     private final ModelPart buff;
 
     public Buff_Model(ModelPart root) {
+        super(root);
         this.buff = root.getChild("buff");
     }
 
@@ -43,17 +41,7 @@ public class Buff_Model<T extends Entity> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(T state) {
 
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        buff.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-    }
-
-    @Override
-    public ModelPart root() {
-        return null;
     }
 }

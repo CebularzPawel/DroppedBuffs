@@ -19,23 +19,22 @@ import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Renderer;
 import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Renderer;
 import net.cebularz.droppedbuffs.sound.ModSounds;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraft.resources.Identifier;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(DroppedBuffs.MOD_ID)
 public class DroppedBuffs
 {
@@ -44,58 +43,56 @@ public class DroppedBuffs
 
 
 
-    public DroppedBuffs()
+    public DroppedBuffs(IEventBus modEventBus, ModContainer modContainer)
     {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
         modEventBus.addListener(this::commonSetup);
 
 
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(this::addCreative);
         ModEntities.register(modEventBus);
         ModSounds.register(modEventBus);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DroppedBuffsConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, DroppedBuffsConfig.SPEC);
 
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         Buff absorptionBuff = new AbsorptionBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "absorption"), absorptionBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "absorption"), absorptionBuff);
 
         Buff fireResistBuff = new FireResistanceBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "fireresist"), fireResistBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "fireresist"), fireResistBuff);
 
         Buff hasteBuff = new HasteBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "haste"), hasteBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "haste"), hasteBuff);
 
         Buff healBuff = new HealBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "heal"), healBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "heal"), healBuff);
 
         Buff invisibilityBuff = new InvisibilityBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "invisibility"), invisibilityBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "invisibility"), invisibilityBuff);
 
         Buff luckBuff = new LuckBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "luck"), luckBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "luck"), luckBuff);
 
         Buff meatBuff = new MeatBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "meat"), meatBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "meat"), meatBuff);
 
         Buff nightVisionBuff = new NightVisionBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "nightvision"), nightVisionBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "nightvision"), nightVisionBuff);
 
         Buff resistBuff = new ResistanceBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "resist"), resistBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "resist"), resistBuff);
 
         Buff speedBuff = new SpeedBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "speed"), speedBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "speed"), speedBuff);
 
         Buff strengthBuff = new StrengthBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "strength"), strengthBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "strength"), strengthBuff);
 
         Buff waterBreathingBuff = new WaterBreathingBuff();
-        BuffRegistry.register(new ResourceLocation(MOD_ID, "waterbreathing"), waterBreathingBuff);
+        BuffRegistry.register(Identifier.fromNamespaceAndPath(MOD_ID, "waterbreathing"), waterBreathingBuff);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
@@ -108,26 +105,26 @@ public class DroppedBuffs
     {
     }
 
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
+        public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
         {
-            EntityRenderers.register(ModEntities.MEAT_BUFF_ENTITY.get(), Meat_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.INVISIBILITY_BUFF_ENTITY.get(), Invisibility_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.RESISTANCE_BUFF_ENTITY.get(), Resistance_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.HEAL_BUFF_ENTITY.get(), Heal_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.STRENGTH_BUFF_ENTITY.get(), Strength_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.HASTE_BUFF_ENTITY.get(), Haste_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.SPEED_BUFF_ENTITY.get(), Speed_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.LUCK_BUFF_ENTITY.get(), Luck_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.ABSORPTION_BUFF_ENTITY.get(), Absorption_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), Water_Breathing_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.NIGHT_VISION_BUFF_ENTITY.get(), Night_Vision_Buff_Renderer::new);
-            EntityRenderers.register(ModEntities.FIRE_RESISTANCE_BUFF_ENTITY.get(), Fire_Resistance_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.MEAT_BUFF_ENTITY.get(), Meat_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.INVISIBILITY_BUFF_ENTITY.get(), Invisibility_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.RESISTANCE_BUFF_ENTITY.get(), Resistance_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.HEAL_BUFF_ENTITY.get(), Heal_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.STRENGTH_BUFF_ENTITY.get(), Strength_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.HASTE_BUFF_ENTITY.get(), Haste_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.SPEED_BUFF_ENTITY.get(), Speed_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.LUCK_BUFF_ENTITY.get(), Luck_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.ABSORPTION_BUFF_ENTITY.get(), Absorption_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.WATER_BREATHING_BUFF_ENTITY.get(), Water_Breathing_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.NIGHT_VISION_BUFF_ENTITY.get(), Night_Vision_Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.FIRE_RESISTANCE_BUFF_ENTITY.get(), Fire_Resistance_Buff_Renderer::new);
 
-            EntityRenderers.register(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
+            event.registerEntityRenderer(ModEntities.BUFF_ENTITY.get(), Buff_Renderer::new);
         }
     }
 }

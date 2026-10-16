@@ -5,20 +5,24 @@ import net.cebularz.droppedbuffs.api.Buff;
 import net.cebularz.droppedbuffs.api.BuffRegistry;
 import net.cebularz.droppedbuffs.entity.ModEntities;
 import net.cebularz.droppedbuffs.sound.ModSounds;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.Random;
 
 public class Basic_Buff_Entity extends Entity {
-    private ResourceLocation buffId;
+    private Identifier buffId;
     public Player owner;
 
     public float bobOffset;
@@ -46,7 +50,7 @@ public class Basic_Buff_Entity extends Entity {
         color = 0xffffff;
     }
 
-    public void setBuffId(ResourceLocation buffId) {
+    public void setBuffId(Identifier buffId) {
         this.buffId = buffId;
     }
 
@@ -55,7 +59,17 @@ public class Basic_Buff_Entity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel level, DamageSource source, float damage) {
+        // Same as the default Entity#hurt behavior from 1.20.1
+        if (this.isInvulnerableToBase(source)) {
+            return false;
+        }
+        this.markHurt();
+        return false;
     }
 
     @Override
@@ -83,16 +97,14 @@ public class Basic_Buff_Entity extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {
-        if (compoundTag.contains("BuffID")) {
-            buffId = new ResourceLocation(compoundTag.getString("BuffID"));
-        }
+    protected void readAdditionalSaveData(ValueInput input) {
+        input.getString("BuffID").ifPresent(id -> buffId = Identifier.parse(id));
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
+    protected void addAdditionalSaveData(ValueOutput output) {
         if (buffId != null) {
-            compoundTag.putString("BuffID", buffId.toString());
+            output.putString("BuffID", buffId.toString());
         }
     }
 
@@ -101,7 +113,7 @@ public class Basic_Buff_Entity extends Entity {
         super.playerTouch(player);
 
         if (player == owner || owner == null || DroppedBuffsConfig.global_drop) {
-            if (!this.level().isClientSide) {
+            if (!this.level().isClientSide()) {
                 Buff buff = this.getBuff();
                 if (buff != null) {
                     buff.onPickup(player);

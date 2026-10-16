@@ -15,12 +15,12 @@ import net.cebularz.droppedbuffs.entity.client.Resistance_Buff.Resistance_Buff_R
 import net.cebularz.droppedbuffs.entity.client.Speed_Buff.Speed_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Strength_Buff.Strength_Buff_Model;
 import net.cebularz.droppedbuffs.entity.client.Water_Breathing_Buff.Water_Breathing_Buff_Model;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid=DroppedBuffs.MOD_ID,bus=Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
+@EventBusSubscriber(modid=DroppedBuffs.MOD_ID,value = Dist.CLIENT)
 public class ModEventBusClientEvents {
 
 

@@ -5,21 +5,23 @@ import net.cebularz.droppedbuffs.DroppedBuffs;
 import net.cebularz.droppedbuffs.api.Buff;
 import net.cebularz.droppedbuffs.api.BuffRegistry;
 import net.cebularz.droppedbuffs.entity.entities.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 public class ModEvents {
-    @Mod.EventBusSubscriber(modid = DroppedBuffs.MOD_ID)
+    @EventBusSubscriber(modid = DroppedBuffs.MOD_ID)
     public static class ForgeEvents {
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
@@ -27,7 +29,7 @@ public class ModEvents {
             Entity entity = event.getSource().getEntity();
             if (entity instanceof Player player) {
                 int chance = random.nextInt(100);
-                int lootingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, player.getMainHandItem());
+                int lootingLevel = player.getMainHandItem().getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.LOOTING));
                 int lootingboost = DroppedBuffsConfig.looting_extra_chance;
                 if(player.hasEffect(MobEffects.LUCK)){
                     chance+= DroppedBuffsConfig.luck_extra_chance;
@@ -67,7 +69,7 @@ public class ModEvents {
         public static void dropBuff(Player killer, LivingDeathEvent event, Buff buff) {
             Entity killedEntity = event.getEntity();
             if (buff != null) {
-                Basic_Buff_Entity buffEntity = buff.getEntityType().create(killedEntity.level());
+                Basic_Buff_Entity buffEntity = buff.getEntityType().create(killedEntity.level(), EntitySpawnReason.EVENT);
                 if (buffEntity != null) {
                     buffEntity.owner = killer;
                     buffEntity.setPos(killedEntity.getX(), killedEntity.getY(), killedEntity.getZ());
